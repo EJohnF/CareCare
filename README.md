@@ -19,5 +19,9 @@ However it costs additional workload.
 For such a small app it's definitely over-engineered. But I think it always good to build the architecture with future perspective, keeping in mind how to expand it and support.
 There are normally also components folder under src for shared component. However in this case there was nothing to share. 
 
+## Tests
+
+- snapshot (currently has a problem - https://github.com/facebook/react-native/issues/29849)
+
 ## What more needs to be done
  

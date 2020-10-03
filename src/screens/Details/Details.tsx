@@ -17,7 +17,7 @@ const mapActions = (dispatch: ThunkDispatch<RootState, void, Action>) => ({
   loadOne: (id: string) => dispatch(loadOneAction(id)),
 });
 
-const connector = connect(mapState, mapActions);
+export const connector = connect(mapState, mapActions);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
@@ -26,7 +26,7 @@ type Props = NavigationComponentProps &
     itemId: string;
   };
 
-const DetailsScreen: FC<Props> = ({loadOne, itemId, item}) => {
+export const DetailsScreen: FC<Props> = ({loadOne, itemId, item}) => {
   useEffect(() => {
     loadOne(itemId);
   }, [itemId, loadOne]);
@@ -49,12 +49,13 @@ const DetailsScreen: FC<Props> = ({loadOne, itemId, item}) => {
               <Text>Genre: {item.Genre}</Text>
               <Text>Director: {item.Director}</Text>
               <Text>Ratings:</Text>
-              {item.Ratings.map((rating) => (
-                <View style={styles.rating}>
-                  <Text>Source: {rating.Source}</Text>
-                  <Text>Value: {rating.Value}</Text>
-                </View>
-              ))}
+              {item.Ratings &&
+                item.Ratings.map((rating) => (
+                  <View style={styles.rating}>
+                    <Text>Source: {rating.Source}</Text>
+                    <Text>Value: {rating.Value}</Text>
+                  </View>
+                ))}
             </>
           )}
         </View>
@@ -70,6 +71,7 @@ const DetailsScreen: FC<Props> = ({loadOne, itemId, item}) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    marginHorizontal: 16,
   },
   activityContainer: {
     alignItems: 'center',
@@ -84,5 +86,3 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
-
-export default connector(DetailsScreen);

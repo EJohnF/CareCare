@@ -17,7 +17,7 @@ export interface Movie {
   Poster: string;
   Production?: string;
   Rated?: string;
-  Ratings: MovieRating[];
+  Ratings?: MovieRating[];
   Released?: string;
   Response?: string;
   Runtime?: string;

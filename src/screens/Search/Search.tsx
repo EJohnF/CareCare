@@ -22,12 +22,12 @@ const mapActions = (dispatch: ThunkDispatch<RootState, void, Action>) => ({
   loadMore: () => dispatch(loadMoreAction()),
 });
 
-const connector = connect(mapState, mapActions);
+export const connector = connect(mapState, mapActions);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = NavigationComponentProps & PropsFromRedux;
 
-const SearchScreen: FC<Props> = ({
+export const SearchScreen: FC<Props> = ({
   componentId,
   search,
   movies,
@@ -91,5 +91,3 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
 });
-
-export default connector(SearchScreen);
