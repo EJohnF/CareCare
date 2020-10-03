@@ -13,3 +13,8 @@ All fixed main dependencies (non-dev), have fixed versions because in rapidly-de
 
 Here `react-navigation` library is used, as it's much simpler solution and kind of "default" approach for new projects on RN.
 However, personally, I like `react-native-navigation` where transition between screen is faster and application in general more modular by architecture. However it costs additional workload. 
+
+## Architecture
+
+For such a small app it's definitely over-engineered. But I think it always good to build the architecture with future perspective, keeping in mind how to expand it and support.
+  
