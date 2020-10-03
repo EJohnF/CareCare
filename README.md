@@ -32,5 +32,5 @@ There are normally also components folder under src for shared component. Howeve
 - Add translations (currently strings hard-coded, library should be use to make it configurable and easy to translate)
 - Persist can be added to low internet load
 - improve styles (for Details screen for sure)
-- 
+- Add more filters ( core side is ready, need to add UI)
  
