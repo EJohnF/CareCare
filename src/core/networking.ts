@@ -2,7 +2,7 @@ import Config from 'react-native-config';
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: '${Config.MOVIE_URL}',
+  baseURL: Config.MOVIE_URL,
   timeout: 3000,
 });
 
@@ -13,7 +13,7 @@ axiosInstance.interceptors.request.use((config) => {
 });
 
 export const request = async (params) => {
-  return axiosInstance.get('', {
+  return axiosInstance.get('/', {
     params,
   });
 };

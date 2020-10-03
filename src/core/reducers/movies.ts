@@ -1,9 +1,16 @@
-import {GET_MOVIES, LOAD_MORE, SET_FILTER} from 'core/constants';
+import {
+  GET_MOVIES,
+  LOAD_MORE,
+  LOAD_ONE,
+  SELECT_ITEM,
+  SET_FILTER,
+} from 'core/constants';
 
 const initialState = {
   page: 1,
   list: [],
   filters: {},
+  selectedId: 0,
 };
 
 interface Action {
@@ -21,7 +28,25 @@ export default (state = initialState, action: Action) => {
     case LOAD_MORE: {
       return {
         ...state,
-        list: [...state.list, action.payload],
+        list: [...state.list, ...action.payload],
+        page: state.page + 1,
+      };
+    }
+    case LOAD_ONE: {
+      const newArray = [...state.list];
+      const index = newArray.findIndex((item) => item.imdbID === action.payload.imdbID);
+      if (index >= 0) {
+        newArray[index] = action.payload;
+      }
+      return {
+        ...state,
+        list: newArray,
+      };
+    }
+    case SELECT_ITEM: {
+      return {
+        ...state,
+        selectedId: action.payload,
       };
     }
     case SET_FILTER: {
@@ -29,6 +54,7 @@ export default (state = initialState, action: Action) => {
         ...state,
         list: [],
         filters: action.payload,
+        page: 1,
       };
     }
     default:

@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import {Provider} from 'react-redux';
 import SearchScreen from 'screens/Search';
-import {DetailsScreen} from 'screens/Details';
+import DetailsScreen from 'screens/Details';
 import {Navigation} from 'react-native-navigation';
 import {screenNames} from 'core/constants';
 import store from 'core/store';
@@ -33,6 +33,13 @@ Navigation.events().registerAppLaunchedListener(() => {
           {
             component: {
               name: screenNames.search,
+              options: {
+                topBar: {
+                  title: {
+                    text: 'Search',
+                  },
+                },
+              },
             },
           },
         ],

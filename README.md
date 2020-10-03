@@ -18,3 +18,6 @@ However, personally, I like `react-native-navigation` where transition between s
 
 For such a small app it's definitely over-engineered. But I think it always good to build the architecture with future perspective, keeping in mind how to expand it and support.
   
+## Components
+
+Here used pre-defined library for visialising elements. But they are re-defined under components folder because with project evolution very often need to implement some customisation, and it's easier if components are already kind of "local"
