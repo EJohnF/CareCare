@@ -1,5 +1,5 @@
 import React, {FC, useEffect} from 'react';
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native';
 import {NavigationComponentProps} from 'react-native-navigation';
 import {loadOneAction} from 'core/actions/movies';
 import {connect, ConnectedProps} from 'react-redux';
@@ -33,7 +33,7 @@ export const DetailsScreen: FC<Props> = ({loadOne, itemId, item}) => {
   return (
     <>
       {item ? (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
           <Image
             style={styles.image}
             PlaceholderContent={<ActivityIndicator />}
@@ -58,7 +58,7 @@ export const DetailsScreen: FC<Props> = ({loadOne, itemId, item}) => {
                 ))}
             </>
           )}
-        </View>
+        </ScrollView>
       ) : (
         <View style={styles.activityContainer}>
           <ActivityIndicator size={'large'} />
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   activityContainer: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
