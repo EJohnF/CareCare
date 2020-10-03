@@ -5,17 +5,25 @@ import {
   SELECT_ITEM,
   SET_FILTER,
 } from 'core/constants';
+import {Filters, Movie} from 'types';
 
-const initialState = {
+const initialState: MoviesState = {
   page: 1,
   list: [],
   filters: {},
-  selectedId: 0,
+  selectedId: '',
 };
+
+export interface MoviesState {
+  page: number;
+  list: Movie[];
+  filters: Filters;
+  selectedId: string;
+}
 
 interface Action {
   type: string;
-  payload: any;
+  payload: Movie[] & Filters & Movie;
 }
 
 export default (state = initialState, action: Action) => {
@@ -34,7 +42,9 @@ export default (state = initialState, action: Action) => {
     }
     case LOAD_ONE: {
       const newArray = [...state.list];
-      const index = newArray.findIndex((item) => item.imdbID === action.payload.imdbID);
+      const index = newArray.findIndex(
+        (item) => item.imdbID === action.payload.imdbID,
+      );
       if (index >= 0) {
         newArray[index] = action.payload;
       }

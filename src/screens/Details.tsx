@@ -1,29 +1,41 @@
 import React, {FC, useEffect} from 'react';
-import {ActivityIndicator, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {NavigationComponentProps} from 'react-native-navigation';
 import {loadOneAction} from 'core/actions/movies';
-import {connect} from 'react-redux';
+import {connect, ConnectedProps} from 'react-redux';
 import {itemSelector} from 'core/reselect';
 import {Image, Text} from 'react-native-elements';
+import {RootState} from 'core/store';
+import {ThunkDispatch} from 'redux-thunk';
+import {Action} from 'redux';
 
-interface Props extends NavigationComponentProps {
-  itemId: string;
-  item: object;
-}
+const mapState = (state: RootState) => ({
+  item: itemSelector(state),
+});
 
-const DetailsScreen: FC<Props> = (props) => {
-  console.log(props);
-  const {loadOne, itemId, item} = props;
+const mapActions = (dispatch: ThunkDispatch<RootState, void, Action>) => ({
+  loadOne: (id: string) => dispatch(loadOneAction(id)),
+});
+
+const connector = connect(mapState, mapActions);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type Props = NavigationComponentProps &
+  PropsFromRedux & {
+    itemId: string;
+  };
+
+const DetailsScreen: FC<Props> = ({loadOne, itemId, item}) => {
   useEffect(() => {
     loadOne(itemId);
-  }, []);
+  }, [itemId, loadOne]);
   return (
     <>
       {item ? (
-        <View style={{alignItems: 'center'}}>
+        <View style={styles.container}>
           <Image
-            style={{width: 200, height: 200, resizeMode: 'contain'}}
-
+            style={styles.image}
             PlaceholderContent={<ActivityIndicator />}
             source={{uri: item.Poster}}
           />
@@ -38,7 +50,7 @@ const DetailsScreen: FC<Props> = (props) => {
               <Text>Director: {item.Director}</Text>
               <Text>Ratings:</Text>
               {item.Ratings.map((rating) => (
-                <View style={{flexDirection: 'row'}}>
+                <View style={styles.rating}>
                   <Text>Source: {rating.Source}</Text>
                   <Text>Value: {rating.Value}</Text>
                 </View>
@@ -47,18 +59,30 @@ const DetailsScreen: FC<Props> = (props) => {
           )}
         </View>
       ) : (
-        <ActivityIndicator />
+        <View style={styles.activityContainer}>
+          <ActivityIndicator size={'large'} />
+        </View>
       )}
     </>
   );
 };
 
-const mapState = (state) => ({
-  item: itemSelector(state),
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+  },
+  activityContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
+  },
+  rating: {
+    flexDirection: 'row',
+  },
 });
 
-const mapActions = (dispatch) => ({
-  loadOne: (id) => dispatch(loadOneAction(id)),
-});
-
-export default connect(mapState, mapActions)(DetailsScreen);
+export default connector(DetailsScreen);

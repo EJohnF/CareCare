@@ -7,14 +7,14 @@ import {
   SET_FILTER,
 } from 'core/constants';
 import {request} from 'core/networking';
+import {Filters, Movie} from 'types';
+import {ThunkAction} from 'redux-thunk';
+import {RootState} from 'core/store';
+import {Action} from 'redux';
 
-interface Filters {
-  s: string;
-  type: 'movie' | 'series' | 'episode';
-  y: number;
-}
-
-export const setFilters = (filters: Filters) => (dispatch: Function) => {
+export const setFilters = (
+  filters: Filters,
+): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch) => {
   dispatch({
     type: SET_FILTER,
     payload: filters,
@@ -22,24 +22,31 @@ export const setFilters = (filters: Filters) => (dispatch: Function) => {
   request(filters).then((res) => {
     dispatch({
       type: GET_MOVIES,
-      payload: res.data.Search,
+      payload: res.data.Search || [],
     });
   });
 };
 
-export const loadMoreAction = () => (dispatch, getState) => {
+export const loadMoreAction = (): ThunkAction<
+  void,
+  RootState,
+  unknown,
+  Action<string>
+> => (dispatch, getState) => {
   request({
     ...getState().movies.filters,
     page: getState().movies.page + 1,
   }).then((res) => {
     dispatch({
       type: LOAD_MORE,
-      payload: res.data.Search,
+      payload: res.data.Search || [],
     });
   });
 };
 
-export const loadOneAction = (id) => (dispatch) => {
+export const loadOneAction = (
+  id: string,
+): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch) => {
   dispatch({
     type: SELECT_ITEM,
     payload: id,

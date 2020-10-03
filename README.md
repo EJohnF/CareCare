@@ -11,13 +11,13 @@ All fixed main dependencies (non-dev), have fixed versions because in rapidly-de
 
 ## Navigation
 
-Here `react-navigation` library is used, as it's much simpler solution and kind of "default" approach for new projects on RN.
-However, personally, I like `react-native-navigation` where transition between screen is faster and application in general more modular by architecture. However it costs additional workload. 
+Personally, I like `react-native-navigation` where transition between screen is faster and application in general more modular by architecture. 
+However it costs additional workload. 
 
 ## Architecture
 
 For such a small app it's definitely over-engineered. But I think it always good to build the architecture with future perspective, keeping in mind how to expand it and support.
-  
-## Components
+There are normally also components folder under src for shared component. However in this case there was nothing to share. 
 
-Here used pre-defined library for visialising elements. But they are re-defined under components folder because with project evolution very often need to implement some customisation, and it's easier if components are already kind of "local"
+## What more needs to be done
+ 
