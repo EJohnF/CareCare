@@ -7,7 +7,7 @@ import {
   SET_FILTER,
 } from 'core/constants';
 import {request} from 'core/networking';
-import {Filters, Movie} from 'types';
+import {Filters} from 'types';
 import {ThunkAction} from 'redux-thunk';
 import {RootState} from 'core/store';
 import {Action} from 'redux';

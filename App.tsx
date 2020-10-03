@@ -6,7 +6,8 @@ import {Navigation} from 'react-native-navigation';
 import {screenNames} from 'core/constants';
 import store from 'core/store';
 
-function WrappedComponent(Component) {
+function WrappedComponent(Component: React.ElementType) {
+  // @ts-ignore
   return function inject(props) {
     const EnhancedComponent = () => (
       <Provider store={store}>

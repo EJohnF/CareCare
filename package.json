@@ -11,7 +11,8 @@
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "pod": "cd ios && pod install && cd ..",
     "run:ios": "yarn && yarn pod && yarn ios",
-    "run:android": "yarn && yarn android"
+    "run:android": "yarn && yarn android",
+    "format": "prettier --write 'src/**/*.{js,ts,tsx}'"
   },
   "dependencies": {
     "@react-native-community/async-storage": "1.12.0",
@@ -43,7 +44,10 @@
     "jest": "^26.4.2",
     "metro-react-native-babel-preset": "^0.63.0",
     "react-test-renderer": "^16.13.1",
-    "typescript": "^4.0.3"
+    "typescript": "^4.0.3",
+    "eslint-config-prettier": "6.12.0",
+    "eslint-plugin-prettier": "3.1.4",
+    "axios-mock-adapter": "1.18.2"
   },
   "jest": {
     "preset": "react-native",

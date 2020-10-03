@@ -2,8 +2,8 @@ import React, {FC, useState, useCallback} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {Navigation, NavigationComponentProps} from 'react-native-navigation';
 import {screenNames} from 'core/constants';
-import 'core/actions/movies';
 import {loadMoreAction, setFilters} from 'core/actions/movies';
+
 import {connect, ConnectedProps} from 'react-redux';
 import {Input, Button, ListItem, Avatar, Text} from 'react-native-elements';
 import {moviesListSelector} from 'core/reselect';
@@ -27,7 +27,13 @@ const connector = connect(mapState, mapActions);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = NavigationComponentProps & PropsFromRedux;
 
-const SearchScreen: FC<Props> = ({componentId, search, movies, loadMore, filters}) => {
+const SearchScreen: FC<Props> = ({
+  componentId,
+  search,
+  movies,
+  loadMore,
+  filters,
+}) => {
   const [title, setTitle] = useState('Star');
   const openDetails = useCallback(
     (item: Movie) => {
