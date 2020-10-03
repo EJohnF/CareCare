@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {SearchScreen} from '../Search';
-import movies from './static/staticMovies';
+import movies from '../../../../static/arrayMovies';
 
 it('renders fullList', () => {
   const tree = renderer

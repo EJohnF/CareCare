@@ -19,7 +19,7 @@ export const setFilters = (
     type: SET_FILTER,
     payload: filters,
   });
-  request(filters).then((res) => {
+  return request(filters).then((res) => {
     dispatch({
       type: GET_MOVIES,
       payload: res.data.Search || [],
@@ -33,7 +33,7 @@ export const loadMoreAction = (): ThunkAction<
   unknown,
   Action<string>
 > => (dispatch, getState) => {
-  request({
+  return request({
     ...getState().movies.filters,
     page: getState().movies.page + 1,
   }).then((res) => {
@@ -51,7 +51,7 @@ export const loadOneAction = (
     type: SELECT_ITEM,
     payload: id,
   });
-  request({
+  return request({
     i: id,
   }).then((res) => {
     dispatch({

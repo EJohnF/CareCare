@@ -51,7 +51,7 @@ export const DetailsScreen: FC<Props> = ({loadOne, itemId, item}) => {
               <Text>Ratings:</Text>
               {item.Ratings &&
                 item.Ratings.map((rating) => (
-                  <View style={styles.rating}>
+                  <View style={styles.rating} key={rating.Source}>
                     <Text>Source: {rating.Source}</Text>
                     <Text>Value: {rating.Value}</Text>
                   </View>

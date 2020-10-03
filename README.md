@@ -1,6 +1,8 @@
 ## Run locally
 
-Assuming you have already installed node, yarn, xcode, jdk
+Assuming you have already installed node, yarn, xcode, jdk 
+
+if you experience build problem for android which says that SDK is not found, one possible way to fix it - add android/local.properties file with path to SDK 
  
 Dry run on ios: `yarn run:ios`
 Dry run on android: `yarn run:android`
@@ -21,7 +23,14 @@ There are normally also components folder under src for shared component. Howeve
 
 ## Tests
 
-- snapshot (currently has a problem - https://github.com/facebook/react-native/issues/29849)
+- basics snapshot for screen components
+- basics unit jest tests for actions
 
 ## What more needs to be done
+
+- Finish coverage of tests (for reducers and rest actions)
+- Add translations (currently strings hard-coded, library should be use to make it configurable and easy to translate)
+- Persist can be added to low internet load
+- improve styles (for Details screen for sure)
+- 
  

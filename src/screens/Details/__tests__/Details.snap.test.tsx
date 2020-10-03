@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {DetailsScreen} from '../Details';
-import movie from './static/movie';
+import movie from '../../../../static/singleMovie';
 
 it('renders filled', () => {
   const tree = renderer
