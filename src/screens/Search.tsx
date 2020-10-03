@@ -1,9 +1,14 @@
 import {Button} from 'react-native';
-import * as React from 'react';
-import {Navigation} from 'react-native-navigation';
+import React, {FC} from 'react';
+import {Navigation, NavigationComponentProps} from 'react-native-navigation';
 import {screenNames} from 'core/constants';
+import 'core/actions/movies';
+import {setFilters} from 'core/actions/movies';
+import {connect} from 'react-redux';
 
-export const SearchScreen = ({componentId}) => {
+interface Props extends NavigationComponentProps {}
+
+const SearchScreen: FC<Props> = ({componentId}) => {
   return (
     <Button
       title="Go to details"
@@ -25,3 +30,13 @@ export const SearchScreen = ({componentId}) => {
     />
   );
 };
+
+const mapState = (state) => ({
+  movies: state.movies.list,
+});
+
+const mapActions = (dispatch) => ({
+  search: (params) => dispatch(setFilters(params)),
+});
+
+export default connect(mapState, mapActions)(SearchScreen);

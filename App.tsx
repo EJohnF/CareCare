@@ -1,10 +1,29 @@
-import {SearchScreen} from 'screens/Search';
+import React from "react";
+import {Provider} from 'react-redux';
+import SearchScreen from 'screens/Search';
 import {DetailsScreen} from 'screens/Details';
 import {Navigation} from 'react-native-navigation';
 import {screenNames} from 'core/constants';
+import store from 'core/store';
 
-Navigation.registerComponent(screenNames.search, () => SearchScreen);
-Navigation.registerComponent(screenNames.details, () => DetailsScreen);
+function WrappedComponent(Component) {
+  return function inject(props) {
+    const EnhancedComponent = () => (
+      <Provider store={store}>
+        <Component {...props} />
+      </Provider>
+    );
+
+    return <EnhancedComponent />;
+  };
+}
+
+Navigation.registerComponent(screenNames.search, () =>
+  WrappedComponent(SearchScreen),
+);
+Navigation.registerComponent(screenNames.details, () =>
+  WrappedComponent(DetailsScreen),
+);
 
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({

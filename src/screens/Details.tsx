@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React, {FC} from 'react';
 import {Button} from 'react-native';
-import {Navigation} from 'react-native-navigation';
+import {Navigation, NavigationComponentProps} from 'react-native-navigation';
 
-export const DetailsScreen = ({componentId}) => {
+interface Props extends NavigationComponentProps {}
+
+export const DetailsScreen: FC<Props> = ({componentId}) => {
   return (
     <Button
       title="Go back to search"
